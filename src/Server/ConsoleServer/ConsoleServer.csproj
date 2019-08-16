@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3FBE0C88-3877-44ED-82B5-F15643A17EDA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoltServer</RootNamespace>
-    <AssemblyName>ConsoltServer</AssemblyName>
+    <RootNamespace>ConsoleServer</RootNamespace>
+    <AssemblyName>ConsoleServer</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,7 +54,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RatingTool.Server\RatingTool.Server.csproj">
+    <ProjectReference Include="..\Registration.Server\Registration.Server.csproj">
       <Project>{5507a5fc-b669-4517-9132-dd10fc98ce08}</Project>
       <Name>RatingTool.Server</Name>
     </ProjectReference>
