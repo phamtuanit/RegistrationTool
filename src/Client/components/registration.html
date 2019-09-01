@@ -1,0 +1,53 @@
+<main role="main" class="container">
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <div class="d-flex align-items-center justify-content-between border-bottom border-gray pb-2 mb-0">
+            <h6>{{commoninfo.supplier}}</h6>
+            <small class="text-danger">{{commoninfo.message}}</small>
+        </div>
+
+        <div class="row mt-2 mr-0">
+            <div class="col-sm-8">
+                <div class="list-group" style="max-height: 100%;overflow: auto;">
+                    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between p-1" v-for="(item, index) in drinks" :key="item.id" @click="selectItem(index)" v-bind:class="{ active: lastSelectedItem == item}">
+                        <small>{{item.name}}</small>
+                        <small class="text-muted mr-2">{{item.comment}}</small>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 pr-0">
+                <div class="border border-gray p-2" v-if="submittedData.data.name">
+                    <h5 class="d-flex justify-content-between align-items-center mb-3">
+                        <div></div>
+                        <span>Your Cart</span>
+                    </h5>
+                    <ul class="list-group mb-0">
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">{{submittedData.data.name}}</h6>
+                                <small class="card-text text-muted">{{submittedData.data.comment}}</small>
+                            </div>
+                            <button type="button" class="close" aria-label="Close" @click="removeSubmitted">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="card-body p-2">
+                        <h6 class="card-title m-0">{{lastSelectedItem.name}}</h6>
+                        <small class="card-text text-muted">{{lastSelectedItem.comment}}</small>
+                        <div class="row border-top border-gray pt-2 mt-1">
+                            <div class="col-sm-8 pr-1">
+                                <input class="form-control" type="text" name="comment" v-model="usercomment" id="usercomment" placeholder="Your comment" :disabled="lastSelectedItem.id == undefined"></input>
+                            </div>
+                            <div class="col-sm-4 pl-1">
+                                <a href="#" class="btn btn-danger m-0" @click="submit" v-bind:class="{ disabled: lastSelectedItem.id == undefined}">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

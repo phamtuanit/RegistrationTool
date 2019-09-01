@@ -3,52 +3,30 @@
 
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"><!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="/css/effect.css"/> -->
-    <title>Vote Tool</title>
-    <style>
-         .foreground {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0; left: 0;
-            z-index: 1;
-        }
-
-        canvas{
-            position:absolute;
-            top:0;
-            left:0;
-            background:white;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/custom.css">
+    <title>Registration Tool</title>
 </head>
 
-<body>
-    <div>
-        <!-- Application component -->
-        <div id="app" class="foreground">
-            <router-view></router-view>
-        </div>
-        <div class="midground">
-            <div class="tuna"></div>
-        </div>
-        <div class="background"></div>
-        <canvas id="canvas" />
+<body class="bg-light">
+    <div id="app">
+        <!-- <router-link to="/registration">Registration</router-link> -->
+        <signing @logged="storeUserInfo" @logout="logout"></signing>
+        <router-view v-if="isLoggedIn" class="router-view"></router-view>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+    <script src="/lib/popper.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"
-        integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.1.2/dist/vue-router.min.js"
-        integrity="sha256-8pMASyWw9NDcTNlXYic8jMJ+tkvGB5b65l2t+EvKLWQ=" crossorigin="anonymous"></script>
+    <script src="/lib/vue.min.js"></script>
+    <script src="/lib/vue-router.min.js"></script>
+    <script src="/lib/axios.min.js"></script>
     <script src="/js/app.js" type="module"></script>
     <script src="/js/main.js"></script>
 </body>
+
 </html>
