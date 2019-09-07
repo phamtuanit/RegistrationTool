@@ -29,7 +29,7 @@ export default {
 
             this.sessionId = (new Date).getTime();
             if (this.host) {
-                this.url = window.location.origin + "/registration?data=" + URLHelper.dataToUrlQuery(this.sessionId, this.host, this.supplier, this.message);
+                this.url = window.Application.Config.baseUrl + "/registration?data=" + URLHelper.dataToUrlQuery(this.sessionId, this.host, this.supplier, this.message);
                 console.info("Url: ", this.url);
 
                 this.timeSet = 20;

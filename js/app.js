@@ -3,6 +3,7 @@ import Helper from "./utility/component-helper.js";
 
 // Configure  application
 const appConfig = {
+    baseUrl: window.location.href,
     set host(hostName) {
         axios.defaults.baseURL = hostName;
     },
@@ -10,7 +11,12 @@ const appConfig = {
         return axios.defaults.baseURL;
     },
     loadConfig: function loadConfig() {
-        const ssConfig = URLHelper.urlToData(window.location.search);
+        const lastSlash = window.location.href.lastIndexOf('/');
+        if (lastSlash > window.location.origin.length) {
+            this.baseUrl = window.location.href.slice(0, lastSlash);
+        }
+
+        const ssConfig = URLHelper.urlToData(window.location.href);
         this.host = ssConfig.host;
         this["userConfig"] = ssConfig;
     },

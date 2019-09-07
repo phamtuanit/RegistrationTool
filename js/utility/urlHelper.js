@@ -23,6 +23,7 @@ window.URLHelper = (function() {
         }
 
         if (url) {
+            url = url.slice(url.lastIndexOf('?'), url.length);
             var dataStr = decodeURIComponent(url).replace("?data=", '');
             dataStr = LZString.decompressFromEncodedURIComponent(dataStr);
             const urlParams = getParams(dataStr);

@@ -3,18 +3,13 @@ export default {
     components: {},
     data() {
         return {
-            homeUrl: window.location.href,
+            homeUrl: window.Application.Config.baseUrl,
             isLoggedIn: false,
             user: { email: "" }
         };
     },
     created() {
         console.info("Assignment component is initialized");
-
-        const lastSlash = window.location.href.lastIndexOf('/');
-        if (lastSlash > window.location.origin.length) {
-            this.homeUrl = homeUrl.slice(0, lastSlash);
-        }
     },
     mounted() {
         const userStr = window.localStorage.getItem('user');
