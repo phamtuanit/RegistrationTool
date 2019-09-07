@@ -7,6 +7,7 @@ export default {
                 message: "",
                 supplier: ""
             },
+            error: "",
             userComment: "",
             refDrinkGroups: {},
             lastSelectedItem: { name: "Please select anything" },
@@ -21,6 +22,7 @@ export default {
         console.info("Registration component is initialized");
     },
     mounted() {
+        this.clearError();
         this.commonInfo.message = window.Application.Config.userConfig.message;
         this.commonInfo.supplier = window.Application.Config.userConfig.supplier;
 
@@ -45,7 +47,8 @@ export default {
             })
             .catch(function(error) {
                 // handle error
-                console.error("Got an error when loading user.", error);
+                console.error("Got an error when loading user.", error.response);
+                that.setError(error);
             })
 
         // Load reference data
@@ -66,10 +69,23 @@ export default {
             })
             .catch(function(error) {
                 // handle error
-                console.error("Got an error when loading data.", error);
+                console.error("Got an error when loading data.", error.response);
+                that.setError(error);
             })
     },
     methods: {
+        clearError: function() {
+            this.error = "";
+        },
+        setError: function(errorObj) {
+            this.error = errorObj.response ? errorObj.response.data : errorObj.message;
+            var that = this;
+            if (errorObj.response) {
+                setTimeout(function() {
+                    that.error = "";
+                }, 10 * 1000);
+            }
+        },
         selectItem: function(index) {
             if (index && index < 0) {
                 this.lastSelectedItem = undefined;
@@ -78,29 +94,37 @@ export default {
             this.lastSelectedItem = this.drinks[index];
         },
         submit: function() {
+            this.clearError();
             const user = JSON.parse(window.localStorage.getItem('user'));
             if (this.lastSelectedItem != undefined && this.lastSelectedItem.id >= 0) {
+                // Declare sebmit function
+                const submitFnc = function(that, url, data) {
+                    axios.post(url, data)
+                        .then(function(response) {
+                            console.log("Response:", response);
+                            that.submittedData = data;
+                        })
+                        .catch(function(error) {
+                            // handle error
+                            console.error("Got an error when submitting data.", error.response);
+                            that.setError(error);
+                        })
+                }
+
+                // Prepare data to create new registration
                 const submittedData = {};
                 submittedData["id"] = user.id;
                 submittedData["user"] = user;
                 submittedData["data"] = JSON.parse(JSON.stringify(this.lastSelectedItem));
                 submittedData.data["comment"] = this.userComment;
 
-                // Submit to server
-                var that = this;
+                // Auto remove recent item
                 const url = '/api/registration/' + submittedData.id;
-                axios.post(url, submittedData)
-                    .then(function(response) {
-                        console.log("Response:", response);
-                        that.submittedData = submittedData;
-                    })
-                    .catch(function(error) {
-                        // handle error
-                        console.error("Got an error when submitting data.", error);
-                    })
+                submitFnc(this, url, submittedData);
             }
         },
-        removeSubmitted: function() {
+        removeSubmitted: function(callBack) {
+            this.clearError();
             if (this.submittedData && this.submittedData.id) {
                 // Submit to server
                 var that = this;
@@ -109,10 +133,14 @@ export default {
                     .then(function(response) {
                         console.log("Response:", response);
                         that.submittedData.data = {};
+                        if (callBack) {
+                            callBack(response);
+                        }
                     })
                     .catch(function(error) {
                         // handle error
-                        console.error("Got an error when submitting data.", error);
+                        console.error("Got an error when submitting data.", error.response);
+                        that.setError(error);
                     })
 
             }

@@ -81,3 +81,13 @@
         transform: translate(150%, -150%) scale(2, 2);
     }
 }
+
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

@@ -42,6 +42,8 @@
                             </div>
                             <button type="button" class="col-sm-4 pl-1 btn btn-danger m-0" @click="submit" v-bind:class="{ disabled: lastSelectedItem.id == undefined}">Submit</button>
                         </div>
+
+                        <small v-if="error" class="card-text text-danger">&#9940; {{error}}</small>
                     </div>
                 </div>
             </div>
