@@ -123,7 +123,7 @@ export default {
                 submitFnc(this, url, submittedData);
             }
         },
-        removeSubmitted: function(callBack) {
+        removeSubmitted: function() {
             this.clearError();
             if (this.submittedData && this.submittedData.id) {
                 // Submit to server
@@ -133,9 +133,6 @@ export default {
                     .then(function(response) {
                         console.log("Response:", response);
                         that.submittedData.data = {};
-                        if (callBack) {
-                            callBack(response);
-                        }
                     })
                     .catch(function(error) {
                         // handle error
