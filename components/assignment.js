@@ -3,12 +3,18 @@ export default {
     components: {},
     data() {
         return {
+            homeUrl: window.location.href,
             isLoggedIn: false,
             user: { email: "" }
         };
     },
     created() {
         console.info("Assignment component is initialized");
+
+        const lastSlash = window.location.href.lastIndexOf('/');
+        if (lastSlash > window.location.origin.length) {
+            this.homeUrl = homeUrl.slice(0, lastSlash);
+        }
     },
     mounted() {
         const userStr = window.localStorage.getItem('user');
@@ -19,19 +25,23 @@ export default {
         }
     },
     methods: {
+        getUserId: function() {
+            const now = new Date();
+            var id = now.getMonth() * 1000000 + now.getDay() * 100000 + now.getHours() * 1000;
+            return id + now.getMinutes() * 100 + now.getMilliseconds();
+        },
         signin: function() {
             if (this.user.email) {
                 this.isLoggedIn = true;
                 this.user["lastAccessTime"] = (new Date()).toTimeString();
-                this.user["id"] = (function() {
-                    const now = new Date();
-                    var id = now.getMonth() * 1000000 + now.getDay() * 100000 + now.getHours() * 1000
-                    return id + now.getMinutes() * 100 + now.getMilliseconds();
-                })();
-                console.log(`User [${this.user}] has logged in`);
+
+                if (!this.user.id) {
+                    this.user["id"] = this.getUserId();
+                }
                 window.localStorage.setItem('user', JSON.stringify(this.user));
                 this.$emit('logged', this.user);
 
+                // Trying to update user Id
                 var that = this;
                 axios.get('/api/registration', {
                         method: 'GET',
@@ -44,19 +54,20 @@ export default {
                             repData.forEach(item => {
                                 if (that.user.email == item.user.email) {
                                     that.user.id = item.user.id;
+                                    console.info("Changed user Id to: ", item.user.id);
                                     window.localStorage.setItem('user', JSON.stringify(that.user));
-                                    return;
                                 }
                             });
                         }
                     })
                     .catch(function(error) {
                         // handle error
-                        console.error("Got an error when loading user.", error);
+                        console.warn("Got an error when loading user.", error);
                     })
-                return;
+
+            } else {
+                console.warn(`Something were wrong when logging: email = [${this.email}]`);
             }
-            console.warn(`Something were wrong when logging: email = [${this.email}]`);
         },
         logout: function() {
             this.isLoggedIn = false;
