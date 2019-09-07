@@ -1,0 +1,59 @@
+<main role="main" class="container">
+    <div class="row mt-2 mr-0">
+        <div class="col-sm-9">
+            <div class="p-2 pb-0 bg-white rounded box-shadow">
+                <div class="d-flex align-items-center justify-content-between border-bottom border-gray pb-1 pt-1 mb-0">
+                    <h6>Register Session</h6>
+                    <small class="text-danger">{{message}}</small>
+                </div>
+
+                <!-- Data -->
+                <form class="mt-2">
+                    <div class="form-row mb-2">
+                        <div class="form-group mb-0 col-md-4">
+                            <input type="text" class="form-control" placeholder="Session Id" disabled v-model="sessionId">
+                        </div>
+                        <div class="form-group mb-0 col-md-8">
+                            <input type="text" name="host" class="form-control" placeholder="Host: http://XXXXXXX.ngrok.io" v-model="host">
+                        </div>
+                    </div>
+                    <div class="form-row mb-2">
+                        <div class="form-group mb-0 col-md-4">
+                            <input type="text" name="supplier" class="form-control" placeholder="Supplier" v-model="supplier">
+                        </div>
+                        <div class="form-group mb-0 col-md-8">
+                            <input type="text" name="mesage" class="form-control" placeholder="Your message to user" v-model="message">
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-between pb-0 mt-2 mb-0">
+                    <span v-if="url">
+                                <small>&#128279;</small>
+                                <a :href="url" class="">Access link</a>
+                    </span>
+
+                    <small v-if="!url">&#9888; Full fill above fields then click register</small>
+                    <button class="align-self-end btn btn-success m-0" style="min-width: 130px" @click="submit">Register <span v-if="url" class="badge badge-light">{{timeSet}}</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 pr-0 pl-0">
+            <div class="bg-white rounded box-shadow pt-1 pb-1">
+                <div class="align-items-center border-bottom border-gray pt-1 mb-0">
+                    <h6 class="mt-1 text-center">Resource</h6>
+                </div>
+                <ul class="pt-2 pb-2 m-0 ">
+                    <li>
+                        <a href="https://dashboard.ngrok.com/get-started ">ngrok</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/phamtuanit/RegistrationTool/blob/master/Release/Release.zip ">Local-Server</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</main>
