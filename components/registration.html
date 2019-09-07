@@ -40,7 +40,7 @@
                             <div class="col-sm-8 pl-0 pr-1">
                                 <input class="form-control" type="text" name="comment" v-model="userComment" id="userComment" placeholder="Your comment" :disabled="lastSelectedItem.id == undefined"></input>
                             </div>
-                            <a class="col-sm-4 pl-1 btn btn-danger m-0" @click="submit" v-bind:class="{ disabled: lastSelectedItem.id == undefined}">Submit</a>
+                            <button type="button" class="col-sm-4 pl-1 btn btn-danger m-0" @click="submit" v-bind:class="{ disabled: lastSelectedItem.id == undefined}">Submit</button>
                         </div>
                     </div>
                 </div>
