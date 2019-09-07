@@ -11,7 +11,7 @@ window.URLHelper = (function() {
     };
 
     var dataToUrlQuery = function ndataToUrl(sessionId, host, supplier, message) {
-        var based64 = LZString.compressToEncodedURIComponent("sessionId=" + sessionId + '&host=' + host + "&supplier=" + supplier + '&message=' + message);
+        var based64 = LZString.compressToEncodedURIComponent("sessionId=" + sessionId + '&host=' + host.trim() + "&supplier=" + supplier.trim() + '&message=' + message.trim());
         return based64;
     }
 
