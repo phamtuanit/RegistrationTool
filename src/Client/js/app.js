@@ -1,13 +1,33 @@
 import Router from './router.js';
 import Helper from "./utility/component-helper.js";
 
+// Configure  application
+const appConfig = {
+    set host(hostName) {
+        axios.defaults.baseURL = hostName;
+    },
+    get host() {
+        return axios.defaults.baseURL;
+    },
+    loadConfig: function loadConfig() {
+        const ssConfig = URLHelper.urlToData(window.location.search);
+        this.host = ssConfig.host;
+        this["userConfig"] = ssConfig;
+    },
+}
+
+window.Application = {
+    Router: Router,
+    Config: appConfig
+};
+
 var appvm = new Vue({
     router: Router.router,
     el: "#app",
     data() {
         return {
             isLoggedIn: false,
-            userInfo: "",
+            userInfo: {},
         };
     },
     components: {
@@ -15,6 +35,7 @@ var appvm = new Vue({
     },
     created() {
         console.log("Vue-App initialized: " + this.$data.title);
+        window.Application.Config.loadConfig();
     },
     methods: {
         storeUserInfo: function(userInfo) {
@@ -30,7 +51,4 @@ var appvm = new Vue({
     },
 });
 
-window.Application = {
-    VueApp: appvm,
-    Router: Router
-};
+window.Application["VueApp"] = appvm;

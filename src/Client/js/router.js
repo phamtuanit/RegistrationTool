@@ -5,6 +5,7 @@ export default {
         routes: [
             { path: '/survey', component: Helper.loadComponent('survey.js') },
             { path: '/registration', component: Helper.loadComponent('registration.js') },
+            { path: '/', component: Helper.loadComponent('configuration.js') },
         ]
     })
 }
