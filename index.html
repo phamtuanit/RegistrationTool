@@ -14,7 +14,7 @@
 <body class="bg-light">
     <div id="app">
         <!-- <router-link to="/registration">Registration</router-link> -->
-        <signing @logged="storeUserInfo" @logout="logout"></signing>
+        <signing v-if="hasLoginPanel" @logged="storeUserInfo" @logout="logout"></signing>
         <router-view v-if="isLoggedIn" class="router-view"></router-view>
     </div>
 

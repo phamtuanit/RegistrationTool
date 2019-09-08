@@ -8,6 +8,7 @@ export default {
             message: "",
             supplier: "A Khoai",
             url: undefined,
+            adminUrl: undefined,
             timeSet: 10,
             timer: undefined,
             errorTimer: undefined,
@@ -44,8 +45,11 @@ export default {
 
             if (this.host && this.host.length >= 14 && (this.host.indexOf('http://') + this.host.indexOf('https://')) >= -1) {
                 this.sessionId = (new Date).getTime();
-                this.url = window.Application.Config.baseUrl + "/registration?data=" + URLHelper.dataToUrlQuery(this.sessionId, this.host, this.supplier, this.message);
-                console.info("Access url: ", this.url);
+                const urlQuery = URLHelper.dataToUrlQuery(this.sessionId, this.host, this.supplier, this.message);
+                this.url = window.Application.Config.baseUrl + "/registration?data=" + urlQuery;
+                this.adminUrl = window.Application.Config.baseUrl + "/registrationadmin?data=" + urlQuery;
+                console.info("User access url: ", this.url);
+                console.info("Admin access url: ", this.adminUrl);
 
                 this.timeSet = 20;
                 var that = this;

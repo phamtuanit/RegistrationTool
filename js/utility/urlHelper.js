@@ -37,6 +37,7 @@ window.URLHelper = (function() {
     }
 
     return {
+        getUrlParams: getParams,
         dataToUrlQuery: dataToUrlQuery,
         urlToData: urlToData
     }

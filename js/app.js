@@ -32,6 +32,7 @@ var appvm = new Vue({
     el: "#app",
     data() {
         return {
+            hasLoginPanel: true,
             isLoggedIn: false,
             userInfo: {},
         };
@@ -42,8 +43,27 @@ var appvm = new Vue({
     created() {
         console.log("Vue-App initialized: " + this.$data.title);
         window.Application.Config.loadConfig();
+        this.hideLoginPanel();
     },
     methods: {
+        hideLoginPanel: function hideLoginPanel() {
+            const urlParam = URLHelper.getUrlParams(window.location.href);
+            if (urlParam && urlParam.hideLoginPanel == 'true') {
+                this.hasLoginPanel = false;
+                this.checklogin();
+            }
+        },
+        checklogin: function checkLogin() {
+            const userStr = window.localStorage.getItem('user');
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                if (user && user.email && user.id) {
+                    console.info("The user has logged in already.");
+                    this.isLoggedIn = true;
+                    this.userInfo = user;
+                }
+            }
+        },
         storeUserInfo: function(userInfo) {
             this.isLoggedIn = true;
             this.userInfo = userInfo;
