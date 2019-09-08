@@ -11,7 +11,7 @@ window.URLHelper = (function() {
     };
 
     var dataToUrlQuery = function ndataToUrl(sessionId, host, supplier, message) {
-        var based64 = LZString.compressToEncodedURIComponent("sessionId=" + sessionId + '&host=' + host + "&supplier=" + supplier + '&message=' + message);
+        var based64 = LZString.compressToEncodedURIComponent("sessionId=" + sessionId + '&host=' + host.trim() + "&supplier=" + supplier.trim() + '&message=' + message.trim());
         return based64;
     }
 
@@ -23,6 +23,7 @@ window.URLHelper = (function() {
         }
 
         if (url) {
+            url = url.slice(url.lastIndexOf('?'), url.length);
             var dataStr = decodeURIComponent(url).replace("?data=", '');
             dataStr = LZString.decompressFromEncodedURIComponent(dataStr);
             const urlParams = getParams(dataStr);
@@ -36,6 +37,7 @@ window.URLHelper = (function() {
     }
 
     return {
+        getUrlParams: getParams,
         dataToUrlQuery: dataToUrlQuery,
         urlToData: urlToData
     }

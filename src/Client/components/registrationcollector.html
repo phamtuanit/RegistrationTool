@@ -1,0 +1,117 @@
+<div id="printable" style="font-size: 0.8rem!important;">
+    <div class="container my-3 p-3 bg-white rounded box-shadow">
+        <div class="row pb-0 rounded bg-light p-2 ml-1 mr-1 mt-0 mb-3">
+            <div class="col-auto pl-1">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="pull-right"><strong>Created User</strong></td>
+                            <td>: {{ceatedUser}}</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Created Date</strong></td>
+                            <td>: {{createdDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-auto pl-1">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="pull-right"><strong>Invoice No.</strong></td>
+                            <td>: {{invoiceNo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-auto ">
+                <h5>Invoice</h5>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm table-responsive-sm ">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="p-1 ">Count</th>
+                            <th class="p-1 ">Name</th>
+                            <th class="p-1 ">Detail</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody style="font-size: 13px; "> -->
+                    <tbody>
+                        <tr v-for="(item, index) in datas" :key="item.id">
+                            <td class="p-1 pl-2">{{item.count}}</td>
+                            <td class="p-1 ">{{item.name}}</td>
+                            <td class="p-1 ">{{item.registerUser}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-4 col-sm-5 "></div>
+            <div class="col-lg-4 col-sm-5 ml-auto ">
+                <table class="table table-clear">
+                    <tbody>
+                        <tr>
+                            <td class="p-1 left ">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="p-1 right ">
+                                <strong>{{total}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-auto align-middle">
+                <div class="align-middle">
+                    <h6 class="align-middle m-0 p-0">Thank You!</h6>
+                </div>
+            </div>
+            <div class="col"></div>
+            <div class="col-auto" v-if="!isPrinting">
+                <button type="button" class="pl-1 btn btn-secondary m-0" style="min-width: 100px;" @click="print">Print</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-3 p-3 bg-white rounded box-shadow">
+        <div class="row">
+            <div class="col-auto ">
+                <h5>Detail</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm table-responsive-sm ">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="p-1 ">No.</th>
+                            <th class="p-1 ">User</th>
+                            <th class="p-1 ">Detail</th>
+                            <th class="p-1 ">Note</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody style="font-size: 13px; "> -->
+                    <tbody>
+                        <tr v-for="(item, index) in registeredDatas" :key="item.id">
+                            <td class="p-1 pl-2 ">{{index + 1}}</td>
+                            <td class="p-1 ">{{item.user.email}}</td>
+                            <td class="p-1 ">{{item.data.name}}</td>
+                            <td class="p-1 ">{{item.data.comment}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

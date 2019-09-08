@@ -1,8 +1,8 @@
-<div class="container sticky-top">
-    <div class="d-flex align-items-center justify-content-between p-3 my-3 text-white-50 bg-purple rounded ">
+<div class="container sticky-top" id="loginPanel">
+    <div class="row align-items-center justify-content-between p-3 my-3 text-white-50 bg-purple rounded ">
         <!-- Logo -->
-        <div class="d-flex align-items-center">
-            <a :href="window.location.origin">
+        <div class="col-auto d-flex align-items-center">
+            <a :href="homeUrl">
                 <div width="48" height="48">
                     <div class="swapping-squares-spinner">
                         <div class="square"></div>
@@ -13,32 +13,30 @@
                 </div>
             </a>
             <!-- Power information -->
-            <div class="lh-100 ml-2">
+            <div class="ml-2">
+                <h6 class="mb-0 text-white lh-100">Registration Tool</h6>
                 <a :href="window.location.origin">
-                    <h6 class="mb-0 text-white lh-100">Registration Tool</h6>
+                    <small class="text-white">Developed by Tuân Phạm</small>
                 </a>
-                <small>Developed by Tuân Phạm</small>
             </div>
         </div>
         <!-- Signin -->
-        <div class="lh-100 align-middle">
-            <div v-if="isLoggedIn" class="mr-1 text-center">
+        <div class="col-auto">
+            <div v-if="isLoggedIn" class="text-center">
                 <small>{{ user.email }}</small>
                 <button type="button" class="btn btn-logout mt-1 p-0" @click="logout" title="Logout">
                     <i class="material-icons">exit_to_app</i>
                 </button>
             </div>
-            <form v-if="!isLoggedIn">
-                <div class="form-group row mb-0">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-6 p-0 pl-1">
-                        <input type="email" name="email" v-model="user.email" class="form-control" id="inputEmail" placeholder="Email">
+            <div v-if="!isLoggedIn" class="btn-toolbar mb-0" role="toolbar ">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
                     </div>
-                    <div class="col-sm-4 p-0 pl-1">
-                        <button type="button" class="btn btn-signin" @click="signin">Sign in</button>
-                    </div>
+                    <input type="email" name="email" v-model="user.email" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
-            </form>
+                <button type="button" class="btn btn-signin ml-1" @click="signin">Sign in</button>
+            </div>
         </div>
     </div>
 </div>

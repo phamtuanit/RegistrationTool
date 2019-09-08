@@ -14,7 +14,7 @@
                             <input type="text" class="form-control" placeholder="Session Id" disabled v-model="sessionId">
                         </div>
                         <div class="form-group mb-0 col-md-8">
-                            <input type="text" name="host" class="form-control" placeholder="Host: http://XXXXXXX.ngrok.io" v-model="host">
+                            <input type="text" name="host" v-model="host" class="form-control" v-bind:class="{ 'blink': hasError}" placeholder="Host: https://XXXXXXX.ngrok.io">
                         </div>
                     </div>
                     <div class="form-row mb-2">
@@ -30,19 +30,22 @@
                 <!-- Footer -->
                 <div class="d-flex align-items-center justify-content-between pb-0 mt-2 mb-0">
                     <span v-if="url">
-                                <small>&#128279;</small>
-                                <a :href="url" class="">Access link</a>
+                        <small class="text-center" v-bind:class="{ 'blink': url}">&#128279;</small>
+                        <a :href="url" >User access link</a>
+
+                        <small class="text-center" v-bind:class="{ 'blink': adminUrl}">&#128279;</small>
+                        <a :href="adminUrl" >Admin access link</a>
                     </span>
 
                     <small v-if="!url">&#9888; Full fill above fields then click register</small>
-                    <button class="align-self-end btn btn-success m-0" style="min-width: 130px" @click="submit">Register <span v-if="url" class="badge badge-light">{{timeSet}}</span></button>
+                    <button class="align-self-end btn btn-success m-0" v-bind:class="{ 'bg-danger text-white blink': hasError}" style="min-width: 130px" @click="submit">Register <span v-if="url" class="badge badge-light">{{timeSet}}</span></button>
                 </div>
             </div>
         </div>
         <div class="col-sm-3 pr-0 pl-0">
             <div class="bg-white rounded box-shadow pt-1 pb-1">
-                <div class="align-items-center border-bottom border-gray pt-1 mb-0">
-                    <h6 class="mt-1 text-center">Resource</h6>
+                <div class="align-items-center border-bottom border-gray pt-1 mb-0 ml-1 mr-1">
+                    <h6 class="mt-1 text-center">Reference</h6>
                 </div>
                 <ul class="pt-2 pb-2 m-0 ">
                     <li>
