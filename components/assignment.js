@@ -64,7 +64,7 @@ export default {
                     })
 
             } else {
-                console.warn(`Something were wrong when logging: email = [${this.email}]`);
+                console.warn('Something were wrong when logging: ', this.email);
             }
         },
         logout: function() {
