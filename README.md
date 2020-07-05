@@ -1,5 +1,6 @@
 # RegistrationTool
 This is small tool allo user to register an information. This tool look like Vote Tool and Google Form.
+
 This project has two components. The first one is Server which provides some APIs for working on the file. The second is WebUI which help you do something with the data.
 
 
@@ -20,8 +21,8 @@ This project has two components. The first one is Server which provides some API
   
   
 ## Create session
-  - Access website [Registration Tool](https://phamtuanit.github.io/RegistrationTool)
-  - Fill your information and server uri above then click **Register**
+  - Access to website [Registration Tool](https://phamtuanit.github.io/RegistrationTool)
+  - Fill your information and server url above then click **Register**
 
   ![phamtuantech](/Release/c-1.PNG)
   
@@ -31,8 +32,8 @@ This project has two components. The first one is Server which provides some API
   
   - Bellow is User page. Your client will use that page to vote / register
   
-  ![phamtuantech](/Release/c-4.PNG)
+  ![phamtuantech](/Release/c-3.PNG)
   
   - Bellow is Admin page. You can check your data there.
   
-  ![phamtuantech](/Release/c-3.PNG)
+  ![phamtuantech](/Release/c-4.PNG)
